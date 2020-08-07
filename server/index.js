@@ -17,6 +17,7 @@ massive({
     console.log('db is connected')
 }).catch(err => console.log(err))
 
+app.get('/api/inventory', ctrl.getInventory)
 app.listen(SERVER_PORT, () => {
     console.log('Server is running on port ' + SERVER_PORT)
 })

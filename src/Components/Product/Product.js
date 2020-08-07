@@ -8,9 +8,12 @@ class Product extends Component {
         }
     }
     render() {
+        const {product} = this.props;
         return(
             <div>
-                Product
+                <p>Name: {product.name}</p>
+                <p>Price: {product.price}</p>
+                <p>Image: {product.image}</p>
             </div>
         )
     }

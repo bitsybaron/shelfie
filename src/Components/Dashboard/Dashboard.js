@@ -9,10 +9,14 @@ class Dashboard extends Component {
         }
     }
     render() {
+        console.log(this.props)
+        const inventoryMap = this.props.inventory.map((product, index) => {
+           return <Product key={index} product={product}/>
+        })
         return(
             <div>
                 Dashboard
-                <Product />
+                {inventoryMap}
             </div>
         )
     }
