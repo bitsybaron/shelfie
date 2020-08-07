@@ -31,6 +31,20 @@ class Form extends Component {
         console.log(this.state)
     }
 
+    updateProduct = (id, name, price, img) => {
+        axios.put(`/api/products/${id}`, {name, price, img})
+        .then(res => {
+            console.log(res)
+            this.setState({
+                imageUrl: '',
+                productName: '',
+                price: 0,
+                
+            })
+        }).catch(err => console.log(err))
+        this.props.getInventory();
+    }
+
     addProduct = () => {
         const {productName, price, imageUrl} = this.state
         axios.post('/api/product', {productName, price, imageUrl})
@@ -53,7 +67,8 @@ class Form extends Component {
                 productName: this.props.editObj.name,
                 price: this.props.editObj.price
             })
-            console.log('it is diff now')
+
+            
             
         }
     }
@@ -65,6 +80,11 @@ class Form extends Component {
                 Name:<input value={this.state.productName} name="productName" onChange={this.universalHandler}/>
                 Price:<input value={this.state.price} name="price" onChange={this.universalHandler}/>
                 <button onClick={this.resetState}>Cancel</button>
+                
+                <button onClick={() => {
+                    
+                    this.updateProduct(this.props.editObj.id, this.state.productName, this.state.price, this.state.imageUrl)
+                    console.log(this.props.editObj.id, this.state.productName, this.state.price, this.state.imageUrl, "help")}}>Save Changes</button>
                 <button onClick={this.addProduct}>Add to Inventory</button>
             </div>
         )
